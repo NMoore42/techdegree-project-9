@@ -2,9 +2,9 @@ import React from 'react';
 
 const Header = () => {
   return(
-    <head>
+    <div>
       <title>React App Assets</title>
-    </head>
+    </div>
   );
 }
 
