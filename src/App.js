@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter,
+  Route
+} from 'react-router-dom';
 import axios from 'axios';
 
 //Components
@@ -14,15 +18,21 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      imageInfo: []
+      imageInfo: [],
+      loading: true
     };
   }
 
   componentDidMount() {
-    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${config}&tags=forrests&per_page=24&format=json&nojsoncallback=1`)
+    this.performSearch();
+  }
+
+  performSearch = (query = 'mushroom') => {
+    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${config}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
       this.setState({
-        imageInfo: response.data.photos.photo
+        imageInfo: response.data.photos.photo,
+        loading: false
       });
     })
     .catch(error => {
@@ -32,16 +42,20 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Header />
-          <div className="container">
-            <Search />
-            <QuickNav />
-            <PhotoContainer
-              imageInfo={this.state.imageInfo}
-            />
+      <BrowserRouter>
+        <div className="container">
+          <Header />
+          <Search onSearch={this.performSearch}/>
+          <QuickNav />
+          <div>
+            {
+              (this.state.loading)
+              ? <p>Fetching Results...</p>
+              : <PhotoContainer imageInfo={this.state.imageInfo} />
+            }
           </div>
-      </div>
+        </div>
+      </BrowserRouter>
     );
   }
 }
