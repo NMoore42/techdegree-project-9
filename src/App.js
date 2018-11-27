@@ -1,35 +1,34 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 //Components
 import Search from './components/Search';
 import QuickNav from './components/QuickNav';
 import PhotoContainer from './components/PhotoContainer';
 import Header from './components/Header';
+import config from './config';
 
-const imageInfo = [
-  {
-    imageSource:"https://farm5.staticflickr.com/4334/37032996241_4c16a9b530.jpg",
-    imageText:"Nick 1",
-    id: 1
-  },
-  {
-    imageSource:"https://farm5.staticflickr.com/4342/36338751244_316b6ee54b.jpg",
-    imageText:"Nick 2",
-    id: 2
-  },
-  {
-    imageSource:"https://farm5.staticflickr.com/4343/37175099045_0d3a249629.jpg",
-    imageText:"Nick 3",
-    id: 3
-  },
-  {
-    imageSource:"https://farm5.staticflickr.com/4425/36337012384_ba3365621e.jpg",
-    imageText:"Nick 4",
-    id: 4
-  }
-];
 
 class App extends Component {
+
+  constructor() {
+    super();
+    this.state = {
+      imageInfo: []
+    };
+  }
+
+  componentDidMount() {
+    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${config}&tags=forrests&per_page=24&format=json&nojsoncallback=1`)
+    .then(response => {
+      this.setState({
+        imageInfo: response.data.photos.photo
+      });
+    })
+    .catch(error => {
+      console.log('Error fetching and parsing data', error);
+    });
+  }
 
   render() {
     return (
@@ -39,7 +38,7 @@ class App extends Component {
             <Search />
             <QuickNav />
             <PhotoContainer
-              imageInfo={imageInfo}
+              imageInfo={this.state.imageInfo}
             />
           </div>
       </div>

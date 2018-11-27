@@ -10,9 +10,12 @@ const PhotoContainer = (props) => {
         {/*Photo List*/}
         {props.imageInfo.map( image =>
           <Photo
-            imageSource={image.imageSource}
-            imageText={image.imageText}
-            key={image.id.toString()}
+            imageID={image.id}
+            imageFarm={image.farm}
+            imageServer={image.server}
+            imageSecret={image.secret}
+            imageText={image.title}
+            key={image.id}
           />
         )}
         <NotFound />
