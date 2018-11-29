@@ -4,7 +4,9 @@ import React, {Component} from "react";
 
    handleSubmit = e => {
      e.preventDefault();
-     this.props.onSearch(this.query.value);
+     let userSearch = this.query.value;
+     let path = `/${userSearch}`;
+     this.props.onSearch(userSearch);
      e.currentTarget.reset();
    }
 

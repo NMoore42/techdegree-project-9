@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter,
-  Route
+  Route,
+  Switch
 } from 'react-router-dom';
 import axios from 'axios';
 
@@ -19,7 +20,8 @@ class App extends Component {
     super();
     this.state = {
       imageInfo: [],
-      loading: true
+      loading: true,
+      userSearch: []
     };
   }
 
@@ -32,7 +34,8 @@ class App extends Component {
     .then(response => {
       this.setState({
         imageInfo: response.data.photos.photo,
-        loading: false
+        loading: false,
+        userSearch: query
       });
     })
     .catch(error => {
@@ -44,16 +47,14 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="container">
-          <Header />
-          <Search onSearch={this.performSearch}/>
-          <QuickNav />
-          <div>
-            {
-              (this.state.loading)
-              ? <p>Fetching Results...</p>
-              : <PhotoContainer imageInfo={this.state.imageInfo} />
-            }
-          </div>
+          <Header onSearch={this.performSearch} />
+            <div>
+              {
+                (this.state.loading)
+                ? <p>Fetching Results...</p>
+                : <PhotoContainer imageInfo={this.state.imageInfo}  userSearch={this.state.userSearch}/>
+              }
+            </div>
         </div>
       </BrowserRouter>
     );
