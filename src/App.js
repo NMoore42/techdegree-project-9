@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   BrowserRouter,
   Route,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom';
 import axios from 'axios';
 
@@ -21,7 +22,21 @@ class App extends Component {
     this.state = {
       imageInfo: [],
       loading: true,
-      userSearch: []
+      userSearch: [],
+      navOptions: [
+        {
+          name:'computers',
+          id:1
+        },
+        {
+          name:'dogs',
+          id:2
+        },
+        {
+          name:'cats',
+          id:3
+        }
+      ]
     };
   }
 
@@ -47,14 +62,15 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="container">
-          <Header onSearch={this.performSearch} />
-            <div>
+          <Switch>
+            <Route render={ ({match}) => <Header onSearch={this.performSearch} urlMatch={match.url} history={this.history} navOptions={this.state.navOptions}/> } />
+            <Route path='/:search' render={ ({match}) => <Header onSearch={this.performSearch} history={this.history} urlMatch={match.url} navOptions={this.state.navOptions}/> } />
+          </Switch>
               {
                 (this.state.loading)
                 ? <p>Fetching Results...</p>
                 : <PhotoContainer imageInfo={this.state.imageInfo}  userSearch={this.state.userSearch}/>
               }
-            </div>
         </div>
       </BrowserRouter>
     );

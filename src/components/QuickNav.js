@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const QuickNav = () => {
+
+
+const QuickNav = (props) => {
+
+
   return (
-    <nav className="main-nav">
-      <ul>
-        <li><Link to='/cats'>Cats</Link></li>
-        <li><Link to='/dogs'>Dogs</Link></li>
-        <li><Link to='/computers'>Computers</Link></li>
-      </ul>
-    </nav>
+    <React.Fragment>
+      <li><NavLink to={`${props.urlMatch}${props.navOptions}`} onClick={ () => {props.onSearch(props.navOptions)}}>{props.navOptions.charAt(0).toUpperCase()}{props.navOptions.slice(1)}</NavLink></li>
+    </React.Fragment>
   );
 }
 

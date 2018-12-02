@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { NavLink } from "react-router-dom";
 
  class Search extends Component {
 
@@ -7,7 +8,9 @@ import React, {Component} from "react";
      let userSearch = this.query.value;
      let path = `/${userSearch}`;
      this.props.onSearch(userSearch);
+     this.props.history.push(path);
      e.currentTarget.reset();
+
    }
 
   render () {
