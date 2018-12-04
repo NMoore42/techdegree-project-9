@@ -3,13 +3,10 @@ import {
   BrowserRouter,
   Route,
   Switch,
-  Redirect
 } from 'react-router-dom';
 import axios from 'axios';
 
 //Components
-import Search from './components/Search';
-import QuickNav from './components/QuickNav';
 import PhotoContainer from './components/PhotoContainer';
 import Header from './components/Header';
 import config from './config';
@@ -70,7 +67,7 @@ class App extends Component {
         <div className="container">
           <Switch>
             <Route exact path='/' render={ ({match}) => <Header onSearch={this.performSearch} urlMatch={match.url} navOptions={this.state.navOptions}/> } />
-            <Route path='/:search' render={ ({match}) => <Header onSearch={this.performSearch} urlMatch={match.url} navOptions={this.state.navOptions}/> } />
+            <Route path='/search/:search' render={ ({match}) => <Header onSearch={this.performSearch} urlMatch={match.url} navOptions={this.state.navOptions}/> } />
           </Switch>
               {
                 (this.state.loading)

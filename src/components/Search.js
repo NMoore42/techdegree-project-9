@@ -1,12 +1,18 @@
 import React, {Component} from "react";
-import { NavLink, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
  class Search extends Component {
 
    handleSubmit = e => {
+     let urlStatus;
+     if (window.location.pathname === '/'){
+       urlStatus = 'search/'
+     } else {
+       urlStatus = ''
+     }
      e.preventDefault();
      let userSearch = this.query.value;
-     let path = `/${userSearch}`;
+     let path = `${urlStatus}${userSearch}`;
      this.props.onSearch(userSearch);
      this.props.history.push(path);
      e.currentTarget.reset();

@@ -5,10 +5,16 @@ import { NavLink } from 'react-router-dom';
 
 const QuickNav = (props) => {
 
+  let urlStatus;
+  if (window.location.pathname === '/'){
+    urlStatus = 'search/'
+  } else {
+    urlStatus = ''
+  }
 
   return (
     <React.Fragment>
-      <li><NavLink to={`/${props.navOptions}`} onClick={ () => {props.onSearch(props.navOptions)}}>{props.navOptions.charAt(0).toUpperCase()}{props.navOptions.slice(1)}</NavLink></li>
+      <li><NavLink to={`${urlStatus}${props.navOptions}`} onClick={ () => {props.onSearch(props.navOptions)}}>{props.navOptions.charAt(0).toUpperCase()}{props.navOptions.slice(1)}</NavLink></li>
     </React.Fragment>
   );
 }
