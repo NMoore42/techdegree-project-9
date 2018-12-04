@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 
  class Search extends Component {
 
@@ -10,7 +10,6 @@ import { NavLink } from "react-router-dom";
      this.props.onSearch(userSearch);
      this.props.history.push(path);
      e.currentTarget.reset();
-
    }
 
   render () {
@@ -31,4 +30,4 @@ import { NavLink } from "react-router-dom";
   }
 }
 
-export default Search;
+export default withRouter(Search);

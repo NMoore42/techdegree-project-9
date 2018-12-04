@@ -22,7 +22,7 @@ class App extends Component {
     this.state = {
       imageInfo: [],
       loading: true,
-      userSearch: [],
+      userSearch: '',
       navOptions: [
         {
           name:'computers',
@@ -41,10 +41,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.performSearch();
+    const searchBarStatus = window.location.pathname.slice(1);
+    if (searchBarStatus === ''){
+      this.performSearch('mushroom');
+    } else {
+      this.performSearch(window.location.pathname.slice(1));
+    }
+
   }
 
-  performSearch = (query = 'mushroom') => {
+  performSearch = (query) => {
     axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${config}&tags=${query}&per_page=24&format=json&nojsoncallback=1`)
     .then(response => {
       this.setState({
@@ -63,8 +69,8 @@ class App extends Component {
       <BrowserRouter>
         <div className="container">
           <Switch>
-            <Route render={ ({match}) => <Header onSearch={this.performSearch} urlMatch={match.url} history={this.history} navOptions={this.state.navOptions}/> } />
-            <Route path='/:search' render={ ({match}) => <Header onSearch={this.performSearch} history={this.history} urlMatch={match.url} navOptions={this.state.navOptions}/> } />
+            <Route exact path='/' render={ ({match}) => <Header onSearch={this.performSearch} urlMatch={match.url} navOptions={this.state.navOptions}/> } />
+            <Route path='/:search' render={ ({match}) => <Header onSearch={this.performSearch} urlMatch={match.url} navOptions={this.state.navOptions}/> } />
           </Switch>
               {
                 (this.state.loading)

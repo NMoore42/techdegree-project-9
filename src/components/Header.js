@@ -12,7 +12,7 @@ const Header = (props) => {
   return(
     <div>
       <title>React App Assets</title>
-      <Search onSearch={props.onSearch} history={props.history} />
+      <Search onSearch={props.onSearch} />
       <nav className="main-nav">
         <ul>
           {quickNavOptions}
