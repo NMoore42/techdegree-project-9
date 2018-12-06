@@ -1,3 +1,4 @@
+//Container for all returned photo info from API request
 import React from 'react';
 import NotFound from './NotFound';
 import Photo from './Photo';

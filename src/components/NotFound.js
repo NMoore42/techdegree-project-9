@@ -1,3 +1,4 @@
+//Displays "not found" results if API request response length is zero
 import React from 'react';
 
 const NotFound = () => {

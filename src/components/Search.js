@@ -1,9 +1,11 @@
+//Search component that updates query state used in API request.
 import React, {Component} from "react";
 import { withRouter } from "react-router-dom";
 
  class Search extends Component {
 
    handleSubmit = e => {
+     //Helper to include "search/" in url if not present
      let urlStatus;
      if (window.location.pathname === '/'){
        urlStatus = 'search/'

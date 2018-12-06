@@ -1,10 +1,11 @@
+//Container for quick select links
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 
 
 const QuickNav = (props) => {
-
+  //Helper to include "search/" in url if not present
   let urlStatus;
   if (window.location.pathname === '/'){
     urlStatus = 'search/'

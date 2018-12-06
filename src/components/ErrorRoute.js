@@ -1,11 +1,13 @@
+//Component that displays 404 message if route does not exist 
 import React from 'react';
 
 const ErrorRoute = () => {
   return (
-    <li className="not-found">
-      <h3>No Results Found</h3>
-      <p>XXXXXXXXXXXXXXXXXXXX</p>
-    </li>
+    <div>
+      <h3>404 Error</h3>
+      <h1>¯\_(ツ)_/¯</h1>
+      <p>Sorry, the page you are looking for does not exist</p>
+    </div>
   );
 }
 

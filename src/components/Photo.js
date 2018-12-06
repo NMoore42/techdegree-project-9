@@ -1,3 +1,4 @@
+//Component for individual photo from search result
 import React from 'react';
 
 const Photo = (props) => {
