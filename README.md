@@ -1,3 +1,8 @@
+Prior to launching, add file title config.js to 'src' folder.  config.js should be set-up as follows:
+const apiKey = 'YOUR API KEY HERE';
+export default apiKey;
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
